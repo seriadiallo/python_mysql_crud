@@ -8,14 +8,15 @@ try:
         nom = input('Donnez le nom ')
         prenom = input('Donnez le prenom ')
         age = int(input('Donnez l\'age '))
-        values = (nom, prenom, age)
-        cursor.execute(SQL, values)
+        values = ((nom, prenom, age), ('Konate', 'Mory', None))
+        val = cursor.executemany(SQL, values)
+        print('le nombre d\'enregistrement', val)
 
 
 
-except e:
+except Exception as e:
     print('une erreur est survenue')
-    # print(e)
+    print(e) # pour afficher les details de l'erreur
     CONNECTION.rollback() # annuler toutes les modifications
 else:
     print(' succes')
